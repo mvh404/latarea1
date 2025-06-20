@@ -1,0 +1,393 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-09-17T03:13:27.617Z",
+  "__export_source": "insomnia.desktop.app:v10.0.0",
+  "resources": [
+    {
+      "_id": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "parentId": null,
+      "modified": 1726541004516,
+      "created": 1726541004516,
+      "name": "API Productos y Categorías",
+      "description": "Endpoints para gestión de productos y categorías con JWT",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_03b689f9d53319e41732363cca60e4e06862c44b",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726541004518,
+      "created": 1726541004518,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1726541004518,
+      "_type": "environment"
+    },
+    {
+      "_id": "env_3eea71162bee485ba5ff024af5e1e47d",
+      "parentId": "env_03b689f9d53319e41732363cca60e4e06862c44b",
+      "modified": 1715442160066,
+      "created": 1715442086680,
+      "name": "dev",
+      "data": {
+        "base_url": "http://localhost:8080/"
+      },
+      "dataPropertyOrder": {
+        "&": ["base_url"]
+      },
+      "color": "#11ff00",
+      "isPrivate": false,
+      "metaSortKey": 1715442086680,
+      "_type": "environment"
+    },
+    {
+      "_id": "req_login_superadmin",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/auth/login",
+      "name": "Login SUPER_ADMIN",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"super.admin@gmail.com\",\n  \"password\": \"superadmin123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.1.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1715447527110,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_login_user",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/auth/login",
+      "name": "Login USER",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"user@gmail.com\",\n  \"password\": \"user123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1715447527111,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_categorias",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/categories",
+      "name": "Listar Categorías (Auth)",
+      "description": "Accesible para USER y SUPER_ADMIN",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login_user', 'b64::$.token::46b' %}"
+      },
+      "metaSortKey": -1715441812674,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_crear_categoria",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/categories",
+      "name": "Crear Categoría (SUPER_ADMIN)",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Electrónicos\",\n  \"description\": \"Dispositivos electrónicos\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login_superadmin', 'b64::$.token::46b' %}"
+      },
+      "metaSortKey": -1715441812673,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_actualizar_categoria",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/categories/1",
+      "name": "Actualizar Categoría (SUPER_ADMIN)",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Electrodomésticos\",\n  \"description\": \"Nueva descripción\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login_superadmin', 'b64::$.token::46b' %}"
+      },
+      "metaSortKey": -1715441812672,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_eliminar_categoria",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/categories/1",
+      "name": "Eliminar Categoría (SUPER_ADMIN)",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login_superadmin', 'b64::$.token::46b' %}"
+      },
+      "metaSortKey": -1715441812671,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_productos",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/products",
+      "name": "Listar Productos (Auth)",
+      "description": "Accesible para USER y SUPER_ADMIN",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login_user', 'b64::$.token::46b' %}"
+      },
+      "metaSortKey": -1715441812670,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_crear_producto",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/products",
+      "name": "Crear Producto (SUPER_ADMIN)",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Laptop HP\",\n  \"description\": \"Core i7, 16GB RAM\",\n  \"price\": 1200.50,\n  \"stockQuantity\": 10,\n  \"category\": {\n    \"id\": 1\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login_superadmin', 'b64::$.token::46b' %}"
+      },
+      "metaSortKey": -1715441812669,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_actualizar_producto",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/products/1",
+      "name": "Actualizar Producto (SUPER_ADMIN)",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Laptop HP Actualizada\",\n  \"price\": 1300.00,\n  \"category\": {\n    \"id\": 1\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login_superadmin', 'b64::$.token::46b' %}"
+      },
+      "metaSortKey": -1715441812668,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_eliminar_producto",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726542534704,
+      "created": 1715468092150,
+      "url": "{{ base_url }}api/products/1",
+      "name": "Eliminar Producto (SUPER_ADMIN)",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login_superadmin', 'b64::$.token::46b' %}"
+      },
+      "metaSortKey": -1715441812667,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "jar_03b689f9d53319e41732363cca60e4e06862c44b",
+      "parentId": "wrk_4064c5dbff2c4b4a8738f9f39e12655f",
+      "modified": 1726541004518,
+      "created": 1726541004518,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    }
+  ]
+}
